@@ -1,5 +1,5 @@
 import { getCustomRepository, Repository } from 'typeorm';
-import { User } from '../entities/Users';
+import { User } from '../entities/User';
 import { UsersRepository } from '../repositories/UsersRepositories';
 
 interface IUsersCreate {
@@ -27,6 +27,13 @@ class UsersService {
     await this.usersRepository.save(users);
 
     return users;
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.usersRepository.findOne({
+      email,
+    });
+    return user;
   }
 }
 
